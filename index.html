@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang = 'en'>
+  <head>
+    <title>Utilities for nft-reflect FA2 contract</title>
+    <script src='dependencies/vue3.js'></script>
+  </head>
+
+  <body>
+    <div id='app'>
+      <div v-for='(condition, i) in conditions' :key='i'>
+        <label>Condition:
+          {{ condition.condition }}
+          <input type='text' placeholder="condition to check for before updating fields" v-model="condition.condiiton" />
+        </label>
+
+        <label>Fields</label>
+        <div v-for="(field, j) in condition.fields" :key="j">
+          <input type='text' v-model="field.name" /> 
+          =
+          <input type='text' v-model="field.value" />
+        </div>
+      </div>
+
+      <button @click='addCondition'>Add Condition</button>
+    </div>
+
+    <script type='module'>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            conditions: []
+          }
+        },
+
+        methods: {
+          addCondition() {
+            this.conditions.push({
+              condition: "var=42",
+              fields: [
+                { name: "name", value: "Fancy token name"},
+                { name: "displayUri", value: "https://imageuri..."}
+              ]
+            });
+          }
+        },
+        mounted() {
+          this.addCondition()
+        }
+      }).mount('#app');
+
+      // app.mount('#app');
+    </script>
+  </body>
+</html>
+
